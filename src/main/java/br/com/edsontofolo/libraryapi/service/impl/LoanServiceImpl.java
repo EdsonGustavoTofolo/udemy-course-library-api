@@ -1,0 +1,45 @@
+package br.com.edsontofolo.libraryapi.service.impl;
+
+import br.com.edsontofolo.libraryapi.api.dto.LoanFilterDTO;
+import br.com.edsontofolo.libraryapi.exception.BusinessException;
+import br.com.edsontofolo.libraryapi.model.entity.Loan;
+import br.com.edsontofolo.libraryapi.model.repository.LoanRepository;
+import br.com.edsontofolo.libraryapi.service.LoanService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class LoanServiceImpl implements LoanService {
+
+    private LoanRepository repository;
+
+    public LoanServiceImpl(LoanRepository repository) {
+        this.repository = repository;
+    }
+
+    @Override
+    public Loan save(Loan loan) {
+        if (repository.existsByBookAndNotReturned(loan.getBook())) {
+            throw new BusinessException("Book already loaned");
+        }
+        return repository.save(loan);
+    }
+
+    @Override
+    public Optional<Loan> findById(Long id) {
+        return repository.findById(id);
+    }
+
+    @Override
+    public Loan update(Loan loan) {
+        return repository.save(loan);
+    }
+
+    @Override
+    public Page<Loan> find(LoanFilterDTO filter, Pageable page) {
+        return repository.findByBookIsbnOrCustomer(filter.getIsbn(), filter.getCustomer(), page);
+    }
+}
