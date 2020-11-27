@@ -50,7 +50,7 @@ public class BookControllerTest {
     public void createBookTest() throws Exception {
         BookDTO dto = new BookDTO(0L, "As Cronicas de Arthur", "OCara", "123456");
 
-        Book savedBook = new Book(1L, "As Cronicas de Arthur", "OCara", "123456");
+        Book savedBook = Book.builder().id(1L).title("As Cronicas de Arthur").author("OCara").isbn("123456").build();
 
         BDDMockito
                 .given(service.save(Mockito.any(Book.class)))
