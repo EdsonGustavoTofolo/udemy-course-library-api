@@ -4,6 +4,7 @@ import br.com.edsontofolo.libraryapi.api.dto.BookDTO;
 import br.com.edsontofolo.libraryapi.exception.BusinessException;
 import br.com.edsontofolo.libraryapi.model.entity.Book;
 import br.com.edsontofolo.libraryapi.service.BookService;
+import br.com.edsontofolo.libraryapi.service.LoanService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -42,6 +43,10 @@ public class BookControllerTest {
 
     @Autowired
     MockMvc mvc; // simula a requisição
+
+    @MockBean // precisa mockar pois no BookController utiliza o @Autowired do mesmo, isso tambem depende do @WebMvcTest onde passamos para carregar o contexto somente desse test
+    LoanService loanService;
+
     @MockBean
     BookService service;
 
