@@ -6,14 +6,12 @@ import br.com.edsontofolo.libraryapi.model.entity.Book;
 import br.com.edsontofolo.libraryapi.model.entity.Loan;
 import br.com.edsontofolo.libraryapi.model.repository.LoanRepository;
 import br.com.edsontofolo.libraryapi.service.impl.LoanServiceImpl;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -21,7 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,7 +57,7 @@ public class LoanServiceTest {
                 .book(book)
                 .build();
 
-        Mockito.when(repository.existsByBookAndNotReturned(book)).thenReturn(true);
+        Mockito.when(repository.existsByBookAndNotReturned(book)).thenReturn(false);
         Mockito.when(repository.save(savingLoan)).thenReturn(savedLoan);
 
         Loan loan = service.save(savingLoan);
@@ -146,7 +144,8 @@ public class LoanServiceTest {
         loan.setId(1L);
 
         PageRequest pageRequest = PageRequest.of(0, 10);
-        List<Loan> list = Arrays.asList(loan);
+        List<Loan> list = new ArrayList<>();
+        list.add(loan);
         Page<Loan> page = new PageImpl<>(list, pageRequest, 1);
 
         Mockito
