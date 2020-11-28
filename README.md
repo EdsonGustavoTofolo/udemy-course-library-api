@@ -1,6 +1,8 @@
 # udemy-course-library-api
 Curso de Design de API's RestFul com Spring Boot, BDD, TDD e o novo JUnit5.
 
+Configuração do Travis CI para Integração Contínua;
+
 Configuração do JaCoCo para Code Coverage;
 
 Configuração do Swagger para documentação dos endpoints da API;
