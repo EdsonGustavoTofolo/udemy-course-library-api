@@ -9,6 +9,8 @@ Configuração do Swagger para documentação dos endpoints da API;
 
 Configuração do Spring Actuator para monitorar e gerenciar a aplicação;
 
+Configuração do Heroku para deploy na nuvem;
+
 [![Build Status](https://travis-ci.org/EdsonGustavoTofolo/udemy-course-library-api.svg?branch=master)](https://travis-ci.org/EdsonGustavoTofolo/udemy-course-library-api)
 
 [![codecov](https://codecov.io/gh/EdsonGustavoTofolo/udemy-course-library-api/branch/master/graph/badge.svg?token=LF9E7WTJI0)](https://codecov.io/gh/EdsonGustavoTofolo/udemy-course-library-api)
